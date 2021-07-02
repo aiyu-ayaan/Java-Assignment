@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDatabaseImp implements UserDatabase {
-
     private List<User> allUser;
 
     public UserDatabaseImp() {
