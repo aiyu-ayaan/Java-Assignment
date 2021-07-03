@@ -4,11 +4,22 @@ import com.java.in.model.User;
 import com.java.in.utils.DuplicateUserFound;
 import com.java.in.utils.NoUserFound;
 
+import java.util.List;
+
+/**
+ * All Function Related to io
+ */
 public interface UserDatabase {
 
-    User logIn(String userName, String password)throws NoUserFound;
+    User getUserByUserName(String userName) throws NoUserFound;
+
+    List<User> getAllUsers();
+
+    User logIn(String userName, String password) throws NoUserFound;
 
     boolean addUser(User user) throws DuplicateUserFound;
 
     boolean deleteUser(User user);
+
+    boolean changePassword(User user, String password) throws NoUserFound;
 }

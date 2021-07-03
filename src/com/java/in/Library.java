@@ -2,6 +2,7 @@ package com.java.in;
 
 import com.java.in.data.UserDatabase;
 import com.java.in.data.UserDatabaseImp;
+import com.java.in.destination.AdminLogin;
 import com.java.in.destination.LogIn;
 import com.java.in.model.User;
 
@@ -25,12 +26,20 @@ public class Library {
                     """);
             var option = new Scanner(System.in).nextInt();
             switch (option) {
+                case 0 -> logInAsAdmin();
                 case 1 -> logIn();
                 case 2 -> signIn();
                 case 3 -> System.exit(0);
                 default -> System.out.println("Check your input !!!");
             }
         }
+    }
+
+    /**
+     * Admin Access
+     */
+    private static void logInAsAdmin() {
+        AdminLogin.logInAsAdmin(userDatabase);
     }
 
     /**
@@ -44,8 +53,7 @@ public class Library {
             System.out.print("Enter Your Password :- ");
             var password = new Scanner(System.in).next();
             var logInUser = userDatabase.logIn(userName, password);
-            var logIn = new LogIn(logInUser);
-            logIn.printMenu();
+            LogIn.getLogInUser(logInUser,userDatabase);
         } catch (Exception e) {
             System.out.println("\n" + e.getLocalizedMessage() + "\n");
         }

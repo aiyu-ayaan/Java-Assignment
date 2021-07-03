@@ -1,11 +1,10 @@
 package com.java.in.data;
 
-import com.java.in.model.Book;
 import com.java.in.model.User;
+import com.java.in.utils.Constants;
 import com.java.in.utils.DuplicateUserFound;
 import com.java.in.utils.NoUserFound;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDatabaseImp implements UserDatabase {
@@ -13,17 +12,12 @@ public class UserDatabaseImp implements UserDatabase {
     private List<User> allUser;
 
     public UserDatabaseImp() {
-        allUser = new ArrayList<>();
-        var user = new User("Aiyu", "aiyu.exe");
-        List<Book> books = new ArrayList<>();
-        books.add(new Book(156, "Programming in C", "12/5/2021", "06/06/2021"));
-        books.add(new Book(256, "Programming in Java", "01/6/2021", "12/06/2021"));
-        user.setBorrowedBooks(books);
-        allUser.add(user);
-
+//        Setting predefined user from Constants::class
+        allUser = Constants.INSTANCE.getList();
     }
 
-    private User getUser(User user) {
+
+    public User getUser(User user) throws NoUserFound {
         for (var u : allUser) {
             if (u.getUserName().equals(user.getUserName()) &&
                     u.getUserPassword().equals(user.getUserPassword())
@@ -31,22 +25,33 @@ public class UserDatabaseImp implements UserDatabase {
                 return u;
             }
         }
-        return null;
+        throw new NoUserFound("No User found with this user name or either your password is incorrect \n");
+    }
+
+    @Override
+    public User getUserByUserName(String userName) throws NoUserFound {
+        for (var user : allUser) {
+            if (userName.equals(user.getUserName()))
+                return user;
+        }
+        throw new NoUserFound("No user found with this userName !!!\n");
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return allUser;
     }
 
     @Override
     public User logIn(String userName, String password) throws NoUserFound {
-        var user = getUser(new User(userName, password));
-        if (user == null)
-            throw new NoUserFound("No User found with this user name or either your password is incorrect");
-        return user;
+        return getUser(new User(userName, password));
     }
 
     @Override
     public boolean addUser(User user) throws DuplicateUserFound {
         for (var u : allUser) {
             if (u.getUserName().equals(user.getUserName())) {
-                throw new DuplicateUserFound("User is already register !!!");
+                throw new DuplicateUserFound("User is already register !!!\n");
             }
         }
         allUser.add(user);
@@ -56,5 +61,15 @@ public class UserDatabaseImp implements UserDatabase {
     @Override
     public boolean deleteUser(User user) {
         return true;
+    }
+
+    @Override
+    public boolean changePassword(User user, String password) throws NoUserFound {
+        var logInUser = getUser(user);
+        if (logInUser != null) {
+            logInUser.setUserPassword(password);
+            return true;
+        }
+        return false;
     }
 }
