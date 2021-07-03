@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * Take Current login user and see all the details of that account
+ *
  */
 public class LogIn {
 
