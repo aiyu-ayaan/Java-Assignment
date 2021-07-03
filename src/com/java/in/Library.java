@@ -53,7 +53,7 @@ public class Library {
             System.out.print("Enter Your Password :- ");
             var password = new Scanner(System.in).next();
             var logInUser = userDatabase.logIn(userName, password);
-            LogIn.getLogInUser(logInUser,userDatabase);
+            LogIn.getLogInUser(logInUser, userDatabase);
         } catch (Exception e) {
             System.out.println("\n" + e.getLocalizedMessage() + "\n");
         }
@@ -62,7 +62,7 @@ public class Library {
     /**
      * New user can log in to library
      */
-    private static void signIn() {
+    public static void signIn() {
         try {
             System.out.println("SIGN IN\n");
             System.out.print("Enter Your User Name :- ");
@@ -71,6 +71,7 @@ public class Library {
             var password = new Scanner(System.in).next();
             var user = new User(userName, password);
             var isAdded = userDatabase.addUser(user);
+            System.out.println(isAdded);
             if (isAdded) System.out.println("User is Added !! \n");
         } catch (Exception e) {
             System.out.println("\n" + e.getLocalizedMessage() + "\n");

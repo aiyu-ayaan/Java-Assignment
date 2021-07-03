@@ -1,8 +1,11 @@
 package com.java.in.destination;
 
+import com.java.in.Library;
 import com.java.in.data.UserDatabase;
+import com.java.in.model.Book;
 import com.java.in.model.User;
 import com.java.in.utils.Constants;
+import com.java.in.utils.NoBookFound;
 import com.java.in.utils.NoUserFound;
 
 import java.util.Locale;
@@ -26,15 +29,19 @@ public class AdminLogin {
         var isTrue = true;
         while (isTrue) {
             System.out.println("""
+                    Admin Panel :-
+                                      
                     Press 1 to show all Student List\s
                     Press 2 to find any Student Name\s
-                    Press 3 to Log Out
+                    Press 3 to add Students\s
+                    Press 4 to Log Out
                     """);
             var option = new Scanner(System.in).nextInt();
             switch (option) {
                 case 1 -> getAllUsers(userDatabase);
                 case 2 -> getStudentFromName(userDatabase);
-                case 3 -> isTrue = false;
+                case 3 -> Library.signIn();
+                case 4 -> isTrue = false;
             }
         }
     }
@@ -44,13 +51,13 @@ public class AdminLogin {
         var userName = new Scanner(System.in).next();
         try {
             var user = userDatabase.getUserByUserName(userName);
-            editUser(user);
+            editUser(user, userDatabase);
         } catch (NoUserFound e) {
             System.out.println(e.getLocalizedMessage());
         }
     }
 
-    private static void editUser(User user) {
+    private static void editUser(User user, UserDatabase userDatabase) {
         var isTrue = true;
         while (isTrue) {
             System.out.println("""
@@ -60,10 +67,66 @@ public class AdminLogin {
                     """);
             var option = new Scanner(System.in).nextInt();
             switch (option) {
-                case 1 -> LogIn.printAllBorrowedBooks(user);
+                case 1 -> printAllBorrowedBooks(user, userDatabase);
+                case 2 -> isTrue = !deleteUser(user, userDatabase);
                 case 3 -> isTrue = false;
             }
         }
+    }
+
+    private static void printAllBorrowedBooks(User user, UserDatabase userDatabase) {
+        var isTrue = true;
+        while (isTrue) {
+            LogIn.printBookList(user.getBorrowedBooks());
+            System.out.println("""
+                    Press 1 to Add Book\s
+                    Press 2 to delete Book\s
+                    Press 3 to delete All Books\s
+                    Press 4 to back
+                    """);
+            var option = new Scanner(System.in).nextInt();
+            switch (option) {
+                case 1 -> addBook(user, userDatabase);
+                case 2 -> deleteBook(user, userDatabase);
+                case 3 -> deleteAllBooks(user, userDatabase);
+                case 4 -> isTrue = false;
+            }
+        }
+    }
+
+    private static void deleteAllBooks(User user, UserDatabase userDatabase) {
+        var isDeleted = userDatabase.deleteAllBooks(user);
+        if (isDeleted) System.out.println("\n All book list is deleted to that user!!! \n");
+    }
+
+    private static void deleteBook(User user, UserDatabase userDatabase) {
+        System.out.print("Enter BookId :- ");
+        try {
+            var bookId = new Scanner(System.in).nextLong();
+            var isDeleted = userDatabase.deleteBook(bookId, user);
+            if (isDeleted) System.out.println("\nDeleted Successfully \n");
+        } catch (NoBookFound e) {
+            System.out.println("\n" + e.getLocalizedMessage() + "\n");
+        }
+
+    }
+
+    private static void addBook(User user, UserDatabase userDatabase) {
+        System.out.print("Books Id :- ");
+        var bookId = new Scanner(System.in).nextLong();
+        System.out.print("Books Name :- ");
+        var bookName = new Scanner(System.in).next();
+        System.out.print("Borrow Date :- ");
+        var borrowDate = new Scanner(System.in).next();
+        System.out.print("Return Date :- ");
+        var returnDate = new Scanner(System.in).next();
+        var book = new Book(bookId, bookName, borrowDate, returnDate);
+        var isAdded = userDatabase.addBook(book, user);
+        if (isAdded) System.out.println("\nBook is Added !!! \n");
+    }
+
+    private static boolean deleteUser(User user, UserDatabase userDatabase) {
+        return userDatabase.deleteUser(user);
     }
 
     private static void getAllUsers(UserDatabase userDatabase) {

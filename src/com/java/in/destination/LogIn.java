@@ -1,14 +1,15 @@
 package com.java.in.destination;
 
 import com.java.in.data.UserDatabase;
+import com.java.in.model.Book;
 import com.java.in.model.User;
 import com.java.in.utils.NoUserFound;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Take Current login user and see all the details of that account
- *
  */
 public class LogIn {
 
@@ -35,9 +36,12 @@ public class LogIn {
         }
     }
 
-    public static void printAllBorrowedBooks(User user) {
+    private static void printAllBorrowedBooks(User user) {
         System.out.println("All Borrowed Books");
-        var books = user.getBorrowedBooks();
+        printBookList(user.getBorrowedBooks());
+    }
+
+    public static void printBookList(List<Book> books) {
         if (books.isEmpty()) {
             System.out.println("No book is borrowed to this user name !!!\n");
             return;

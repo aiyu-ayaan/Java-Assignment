@@ -6,7 +6,7 @@ public class Book {
     private String returnDate;
     private String borrowedDate;
 
-    public Book(long bookId, String bookName, String returnDate, String borrowedDate) {
+    public Book(long bookId, String bookName, String borrowedDate, String returnDate) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.returnDate = returnDate;

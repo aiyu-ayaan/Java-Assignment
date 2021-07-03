@@ -1,11 +1,15 @@
 package com.java.in.data;
 
+import com.java.in.model.Book;
 import com.java.in.model.User;
 import com.java.in.utils.Constants;
 import com.java.in.utils.DuplicateUserFound;
+import com.java.in.utils.NoBookFound;
 import com.java.in.utils.NoUserFound;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDatabaseImp implements UserDatabase {
 
@@ -60,6 +64,7 @@ public class UserDatabaseImp implements UserDatabase {
 
     @Override
     public boolean deleteUser(User user) {
+        allUser = allUser.stream().filter(u -> !(u.getUserName().equals(user.getUserName()))).collect(Collectors.toList());
         return true;
     }
 
@@ -71,5 +76,38 @@ public class UserDatabaseImp implements UserDatabase {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean addBook(Book book, User user) {
+        var books = user.getBorrowedBooks();
+        books.add(book);
+        user.setBorrowedBooks(books);
+        return true;
+    }
+
+    @Override
+    public boolean deleteBook(long bookId, User user) throws NoBookFound {
+        var book = getBookById(bookId, user);
+        if (book == null) throw new NoBookFound("No Book is found by this Id");
+        user.setBorrowedBooks(user.getBorrowedBooks()
+                .stream()
+                .filter(b -> (bookId != b.getBookId()))
+                .collect(Collectors.toList()));
+        return true;
+    }
+
+    @Override
+    public boolean deleteAllBooks(User user) {
+        user.setBorrowedBooks(new ArrayList<>());
+        return true;
+    }
+
+    private Book getBookById(long bookId, User user) {
+        var books = user.getBorrowedBooks();
+        for (var book : books) {
+            if (bookId == book.getBookId()) return book;
+        }
+        return null;
     }
 }
