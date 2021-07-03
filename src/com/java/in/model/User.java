@@ -14,6 +14,12 @@ public class User {
         this.borrowedBooks = new ArrayList<>();
     }
 
+    public User(String userName, String userPassword, List<Book> borrowedBooks) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.borrowedBooks = borrowedBooks;
+    }
+
     public String getUserName() {
         return userName;
     }

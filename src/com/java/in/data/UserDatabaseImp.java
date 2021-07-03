@@ -2,8 +2,8 @@ package com.java.in.data;
 
 import com.java.in.model.Book;
 import com.java.in.model.User;
-import com.java.in.utils.Constants;
 import com.java.in.utils.DuplicateUserFound;
+import com.java.in.utils.Constants;
 import com.java.in.utils.NoBookFound;
 import com.java.in.utils.NoUserFound;
 
@@ -17,7 +17,7 @@ public class UserDatabaseImp implements UserDatabase {
 
     public UserDatabaseImp() {
 //        Setting predefined user from Constants::class
-        allUser = Constants.INSTANCE.getList();
+        allUser = Constants.list;
     }
 
 
