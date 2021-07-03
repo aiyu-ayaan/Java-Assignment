@@ -4,7 +4,7 @@ import com.java.in.Library;
 import com.java.in.data.UserDatabase;
 import com.java.in.model.Book;
 import com.java.in.model.User;
-import com.java.in.utils.Constants;
+import com.java.in.utils.Exp;
 import com.java.in.utils.NoBookFound;
 import com.java.in.utils.NoUserFound;
 
@@ -15,13 +15,13 @@ public class AdminLogin {
     public static void logInAsAdmin(UserDatabase userDatabase) {
         System.out.print("Enter Admin Username :- ");
         var adminUserName = new Scanner(System.in).next().toLowerCase(Locale.ROOT);
-        if (!adminUserName.equals(Constants.ADMIN_ID)) {
+        if (!adminUserName.equals(Exp.ADMIN_ID)) {
             System.out.println("Invalid Admin User Id !!!\n");
             return;
         }
         System.out.print("Enter Admin Password :- ");
         var adminUserPassword = new Scanner(System.in).next();
-        if (!adminUserPassword.equals(Constants.ADMIN_PASSWORD)) {
+        if (!adminUserPassword.equals(Exp.ADMIN_PASSWORD)) {
             System.out.println("Invalid Admin Password !!!\n\n");
             return;
         }
