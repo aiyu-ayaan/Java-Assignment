@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface UserDatabase {
     /**
-     * Takes username ias parameter and return match user if found .
+     * Takes username as a parameter and return match user if found .
      *
      * @param userName Valid username to search in database
      * @return match user

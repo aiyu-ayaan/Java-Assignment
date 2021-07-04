@@ -84,7 +84,7 @@ public class LogIn {
      *
      * @param user         login User
      * @param userDatabase userDatabase
-     * @see com.java.library.destination.LogIn#printMenu(User, UserDatabase) 
+     * @see com.java.library.destination.LogIn#printMenu(User, UserDatabase)
      */
     private static void updatePassword(User user, UserDatabase userDatabase) {
         System.out.print("Enter your new password :- ");
@@ -92,7 +92,7 @@ public class LogIn {
 //        Validate new password
         boolean isChange = false;
         try {
-            var isValidate = Validate.validatePassword(password);
+            Validate.validatePassword(password);
             isChange = userDatabase.changePassword(user, password);
         } catch (NoUserFound | PasswordException e) {
             System.out.println("\n" + e.getLocalizedMessage() + "\n");
