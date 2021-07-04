@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *Entity class for student
  */
 public class User {
     private String userName;

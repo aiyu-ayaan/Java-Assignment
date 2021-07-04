@@ -13,12 +13,16 @@ import com.java.library.utils.Validate;
 import java.util.Scanner;
 
 /**
+ * <h1>Library Management</h1>
  * Entry point of this project
  *
+ * @author ayaan
+ * @version 1.0
  * @see com.java.library.data.UserDatabase UserDatabase
  * @see com.java.library.destination.AdminLogin Admin Pannel
  * @see com.java.library.destination.LogIn LogIn Pannel
  * @see com.java.library.utils.Validate#validatePassword(String) user to valid password
+ * @since 3 july 2021
  */
 public class Library {
 
