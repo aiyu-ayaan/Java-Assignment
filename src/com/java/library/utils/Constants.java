@@ -1,16 +1,21 @@
-package com.java.in.utils;
+package com.java.library.utils;
 
-import com.java.in.model.Book;
-import com.java.in.model.User;
+import com.java.library.model.Book;
+import com.java.library.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contain All constants used in this project
+ */
 public abstract class Constants {
     public static String ADMIN_ID = "system";
     public static String ADMIN_PASSWORD = "system";
+
+
     public static List<User> list = new ArrayList<User>() {{
-        add(new User("aiyu", "aiyu.exe", new ArrayList<Book>() {{
+        add(new User("ayaan", "aiyu.exe", new ArrayList<Book>() {{
             add(new Book(156, "Programming in C", "12/5/2021", "6/6/2021"));
             add(new Book(256, "Programming in Java", "1/6/2021", "12/6/2021"));
         }}));
