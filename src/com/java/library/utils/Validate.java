@@ -11,7 +11,9 @@ public class Validate {
      *
      * @param password inputPassword
      * @return return boolean
+     * @throws PasswordException when password doesn't match with minimum requirement.
      * @see java.util.regex.Pattern Pattern
+     *
      */
     public static boolean validatePassword(String password) throws PasswordException {
         var ex1 = "\\w{5,}\\d*";

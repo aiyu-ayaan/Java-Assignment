@@ -9,7 +9,10 @@ import com.java.library.utils.NoUserFound;
 import java.util.List;
 
 /**
- * All Function Related to i/o
+ * All Function Related to I/O
+ *
+ * @author ayaan
+ * @since 1.0
  */
 public interface UserDatabase {
     /**
@@ -89,7 +92,7 @@ public interface UserDatabase {
      * Take bookId and Current logIn user and return boolean
      *
      * @param bookId book id
-     * @param user current logIn User
+     * @param user   current logIn User
      * @return Boolean value
      * @throws NoBookFound When no book found
      * @see com.java.library.model.User User

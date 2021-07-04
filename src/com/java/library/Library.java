@@ -21,7 +21,7 @@ import java.util.Scanner;
  * @see com.java.library.data.UserDatabase UserDatabase
  * @see com.java.library.destination.AdminLogin Admin Pannel
  * @see com.java.library.destination.LogIn LogIn Pannel
- * @see com.java.library.utils.Validate#validatePassword(String) user to valid password
+ * @see com.java.library.utils.Validate#validatePassword(String)
  * @since 3 july 2021
  */
 public class Library {

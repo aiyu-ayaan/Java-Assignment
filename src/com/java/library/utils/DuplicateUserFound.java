@@ -15,4 +15,5 @@ public class DuplicateUserFound extends Exception {
     public DuplicateUserFound(String message) {
         super(message);
     }
+
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Entity class for student
+ * Entity class for student
  */
 public class User {
     private String userName;
@@ -31,6 +31,7 @@ public class User {
      * @param borrowedBooks
      * @see com.java.library.utils.Constants Constants
      * @see com.java.library.data.UserDatabaseImp User Database
+     * @see com.java.library.model.Book books entity
      */
     public User(String userName, String userPassword, List<Book> borrowedBooks) {
         this.userName = userName;
